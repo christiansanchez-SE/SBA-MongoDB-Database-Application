@@ -5,9 +5,9 @@ const fetchAllFantasies = async (req, res) =>{
     // 2. Send the comics back as a response
 
   // --------------------------------(1)
-  const fantsies = await Fantasy.find();
+  const fantasies  = await Fantasy.find();
   // --------------------------------(2)
-  res.json({ fantsies: fantsies });
+  res.json({ fantasies: fantasies });
 }
 
 const fetchFantasy = async (req, res) => {
@@ -69,7 +69,7 @@ const updateFantasy = async (req, res) => {
   const heros = req.body.heros;
   const villains = req.body.villains;
   // --------------------------------(3)
-  const fantasy = await Fantasy.create({
+  const fantasy = await Fantasy.findByIdAndUpdate({
     book_publisher: book_publisher,
     title: title,
     author: author,
@@ -102,5 +102,5 @@ module.exports = {
     fetchFantasy,
     createFantasy,
     updateFantasy,
-    deleteFantasy
+    deleteFantasy,
 }

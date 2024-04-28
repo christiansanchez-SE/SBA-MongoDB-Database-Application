@@ -46,9 +46,7 @@ app.post("/comics", comicsController.createComic);
 // -----------------> Update a Specific Note - [Update]
 app.put("/comics/:id", comicsController.updateComic);
 // -----------------> Delete a Specific Note - [Delete]
-app.put("/comics/:id", comicsController.deleteComic);
-
-
+app.delete("/comics/:id", comicsController.deleteComic);
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -62,9 +60,9 @@ app.get("/fantasy/:id", fantasyController.fetchFantasy);
 // -----------------> Create a Notes - [Create / POST]
 app.post("/fantasy", fantasyController.createFantasy);
 // -----------------> Update a Specific Note - [Update]
-app.get("/fantasy/:id", fantasyController.upadteFantasy);
+app.put("/fantasy/:id", fantasyController.updateFantasy);
 // -----------------> Delete a Specific Note - [Delete]
-app.get("/fantasy/:id", fantasyController.deleteFantasy);
+app.delete("/fantasy/:id", fantasyController.deleteFantasy);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
