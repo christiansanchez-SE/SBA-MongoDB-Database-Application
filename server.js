@@ -37,6 +37,8 @@ app.get("/comics", comicsController.fetchAllComics);
 app.get("/comics/:id", comicsController.fetchComic);
 // -----------------> Create a Notes - [Create / POST]
 app.post("/comics", comicsController.createComic);
+// -----------------> Update a Specific Note - [Update]
+app.put("/comics/:id", comicsController.updateComic);
 
 
 

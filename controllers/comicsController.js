@@ -48,19 +48,63 @@ const createComic = async (req, res) => {
     genre: genre,
     heros: heros,
     villains: villains,
-  })
+  });
   // --------------------------------(3)
-  res.json({ comic: comic })
-
-
-
+  res.json({ comic: comic });
 
 }
+
+const updateComic = async (req, res) => {
+  // 1. Get id off the url
+  // 2. Get the data off the id
+  // 3. Find and Update Comic
+  // 4. Retrieve updatedComic and send it as a response 
+
+  // --------------------------------(1)
+ const comicId = req.params.id;
+  // --------------------------------(2)
+  const book_publisher = req.body.book_publisher;
+  const title = req.body.title;
+  const author = req.body.author;
+  const artist = req.body.artist;
+  const genre = req.body.genre;
+  const heros = req.body.heros;
+  const villains = req.body.villains;
+  // --------------------------------(3)
+ const comic = await Comic.findByIdAndUpdate(comicId, {
+    book_publisher: book_publisher,
+    title: title,
+    author: author,
+    artist: artist,
+    genre: genre,
+    heros: heros,
+    villains: villains,
+ });
+  // --------------------------------(4)
+  const updatedComic = await Comic.findById(comicId);
+  res.json({ comic: updatedComic });
+  
+};
+
+const deleteComic = async (req, res) => {
+  // 1. Get the id off the url
+  // 2. Delete the record
+  // 3. Send Response
+
+// --------------------------------(1)
+const comicId = req.params.id;
+// --------------------------------(2)
+await Comic.findByIdAndDelete(comicId);
+// --------------------------------(3)
+res.json({ success: "Record  has been deleted successfully"});
+};
 
 module.exports = {
     fetchAllComics,
     fetchComic,
-    createComic
+    createComic,
+    updateComic,
+    deleteComic
 };
 
 // {
