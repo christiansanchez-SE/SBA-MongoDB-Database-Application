@@ -11,10 +11,12 @@ const connectToDB = require("./config/connectToDB.js");
 // Importing the Comic moduel from "comic"
 const Comic = require("./models/comic");
 const Fantasy = require("./models/fantasy");
+const Scifi = require("./models/scifi")
 
 // Importing the comicsController.js
 const comicsController = require("./controllers/comicsController.js");
 const fantasyController = require("./controllers/fantasyController.js")
+const scifiController = require("./controllers/scifiController.js");
 
 //Middleware [Lets you use urlencoded in postman]
 app.use(express.urlencoded({ extended: true }));
@@ -69,11 +71,15 @@ app.delete("/fantasy/:id", fantasyController.deleteFantasy);
     // Obj: We want to establish CRUD routes for our Notes Model
 
 // -----------------> GET all Notes - [Read]
+app.get("/scifi", scifiController.fetchAllScifis);
 // -----------------> GET a Specific Note by ID - [Read]
+app.get("/scifi/:id", scifiController.fetchScifi);
 // -----------------> Create a Notes - [Create / POST]
+app.post("/scifi", scifiController.createScifi);
 // -----------------> Update a Specific Note - [Update]
+app.put("/scifi/:id", scifiController.updateScifi);
 // -----------------> Delete a Specific Note - [Delete]
-
+app.delete("/scifi/:id", scifiController.deleteScifi);
 
 
 

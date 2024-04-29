@@ -1,34 +1,33 @@
-const Comic = require("../models/comic");
+const Scifi = require("../models/scifi");
 
-const fetchAllComics = async (req, res) => {
+const fetchAllScifis = async (req, res) => {
     // 1. Get all comics from mongoDB
     // 2. Send the comics back as a response
 
   // --------------------------------(1)
-    const comics = await Comic.find();
+  const scifi = await Scifi.find();
   // --------------------------------(2)
-    res.json({ comics: comics });
-
+  res.json({ scifi: scifi});
 };
 
-const fetchComic = async (req, res) => {
+const fetchScifi = async (req, res) => {
   // 1. Get id off the url
   // 2. Find the note assoc. w/ ID
   // 3.Send response with that note as the payload
 
   // --------------------------------(1)
-  const comicId = req.params.id;
+  const scifiId = req.params.id;
   // --------------------------------(2)
-  const comic = await Comic.findById(comicId);
+  const scifi = await Scifi.findById(scifiId);
   // --------------------------------(3)
-  res.json({ comic: comic});
+  res.json({ scifi:scifi });
 
-}
+};
 
-const createComic = async (req, res) => {
+const createScifi = async (req, res) => {
   // 1. Get data from req.body
-  // 2. Create comic
-  // 3. Respond with new copy of Comic
+  // 2. Create scifi
+  // 3. Respond with new copy of scifi
 
   // --------------------------------(1)
   console.log(`BODY: ${req.body}`);
@@ -40,7 +39,7 @@ const createComic = async (req, res) => {
   const heros = req.body.heros;
   const villains = req.body.villains;
   // --------------------------------(2)
-  const comic = await Comic.create({
+  const scifi = await Scifi.create({
     book_publisher: book_publisher,
     title: title,
     author: author,
@@ -50,18 +49,18 @@ const createComic = async (req, res) => {
     villains: villains,
   });
   // --------------------------------(3)
-  res.json({ comic: comic });
+  res.json({ scifi: scifi})
 
 }
 
-const updateComic = async (req, res) => {
+const updateScifi = async (req, res) => {
   // 1. Get id off the url
   // 2. Get the data off the id
   // 3. Find and Update Comic
   // 4. Retrieve updatedComic and send it as a response 
 
   // --------------------------------(1)
- const comicId = req.params.id;
+  const scifiId = req.params.id;
   // --------------------------------(2)
   const book_publisher = req.body.book_publisher;
   const title = req.body.title;
@@ -71,7 +70,7 @@ const updateComic = async (req, res) => {
   const heros = req.body.heros;
   const villains = req.body.villains;
   // --------------------------------(3)
- const comic = await Comic.findByIdAndUpdate(comicId, {
+  const scifi = await Scifi.findByIdAndUpdate(scifiId, {
     book_publisher: book_publisher,
     title: title,
     author: author,
@@ -81,38 +80,28 @@ const updateComic = async (req, res) => {
     villains: villains,
  });
   // --------------------------------(4)
-  const updatedComic = await Comic.findById(comicId);
-  res.json({ comic: updatedComic });
-  
-};
+ const updatedScifi = await Scifi.findByIdAndUpdate(scifiId);
+ res.json({ scifi: updatedScifi });
 
-const deleteComic = async (req, res) => {
+}
+
+const deleteScifi = async (req, res) => {
   // 1. Get the id off the url
   // 2. Delete the record
   // 3. Send Response
 
-// --------------------------------(1)
-const comicId = req.params.id;
-// --------------------------------(2)
-await Comic.findByIdAndDelete(comicId);
-// --------------------------------(3)
-res.json({ success: "Record  has been deleted successfully" });
-};
+  // --------------------------------(1)
+  const scifiId = req.params.id;
+  // --------------------------------(2)
+  await Scifi.findByIdAndDelete(scifiId);
+  // --------------------------------(3)
+  res.json({ success: "Record  has been deleted successfully" })
+}
 
 module.exports = {
-    fetchAllComics,
-    fetchComic,
-    createComic,
-    updateComic,
-    deleteComic
+    fetchAllScifis,
+    fetchScifi,
+    createScifi,
+    updateScifi,
+    deleteScifi
 };
-
-// {
-//     "book_publisher": "DC Comics",
-//     "title": "SUPERBOY: THE MAN OF TOMORROW",
-//     "author": "Kenny Porter",
-//     "artist": "Jahnoy Lindsay",
-//     "genre": ["Superhero", "Action", "Adventure"],
-//     "heros": ["Superboy", "Supergirl", "Superman", "Batman", "The Flash"],
-//     "villains": ["Chemo", "Lex Luthor", "Gorilla Grodd"]
-// }
