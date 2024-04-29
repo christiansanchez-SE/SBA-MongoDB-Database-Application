@@ -1,25 +1,26 @@
 // - - - > Allows .env
-require("dotenv").config;
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
-PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // This pulls our Mongoose connection into application
 const connectToDB = require("./config/connectToDB.js");
 
-// Importing the Comic moduel from "comic"
-const Comic = require("./models/comic");
-const Fantasy = require("./models/fantasy");
-const Scifi = require("./models/scifi")
-
-// Importing the comicsController.js
-const comicsController = require("./controllers/comicsController.js");
-const fantasyController = require("./controllers/fantasyController.js")
-const scifiController = require("./controllers/scifiController.js");
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 //Middleware [Lets you use urlencoded in postman]
 app.use(express.urlencoded({ extended: true }));
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+//Routes
+const comicRoutes = require("./routes/comic");
+const fantasyRoutes = require("./routes/fantasy");
+const scifiRoutes = require("./routes/scifi");
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 // ---> Recieving reqs on cross-origins **
 const cors = require("cors");
@@ -29,6 +30,7 @@ app.use(cors());
 // This initializes our connectToDB() function
 connectToDB();
 
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 // Creating the landing page
 app.get("/", (req, res) => {
@@ -37,50 +39,12 @@ app.get("/", (req, res) => {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-    // Obj: We want to establish CRUD routes for our Notes Model
-
-// -----------------> GET all Notes - [Read]
-app.get("/comics", comicsController.fetchAllComics);
-// -----------------> GET a Specific Note by ID - [Read]
-app.get("/comics/:id", comicsController.fetchComic);
-// -----------------> Create a Notes - [Create / POST]
-app.post("/comics", comicsController.createComic);
-// -----------------> Update a Specific Note - [Update]
-app.put("/comics/:id", comicsController.updateComic);
-// -----------------> Delete a Specific Note - [Delete]
-app.delete("/comics/:id", comicsController.deleteComic);
+//Importing routes
+app.use("/comics", comicRoutes);
+app.use("/fantasy", fantasyRoutes);
+app.use("/scifi", scifiRoutes);
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-    // Obj: We want to establish CRUD routes for our Notes Model
-
-// -----------------> GET all Notes - [Read]
-app.get("/fantasy", fantasyController.fetchAllFantasies);
-// -----------------> GET a Specific Note by ID - [Read]
-app.get("/fantasy/:id", fantasyController.fetchFantasy);
-// -----------------> Create a Notes - [Create / POST]
-app.post("/fantasy", fantasyController.createFantasy);
-// -----------------> Update a Specific Note - [Update]
-app.put("/fantasy/:id", fantasyController.updateFantasy);
-// -----------------> Delete a Specific Note - [Delete]
-app.delete("/fantasy/:id", fantasyController.deleteFantasy);
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-    // Obj: We want to establish CRUD routes for our Notes Model
-
-// -----------------> GET all Notes - [Read]
-app.get("/scifi", scifiController.fetchAllScifis);
-// -----------------> GET a Specific Note by ID - [Read]
-app.get("/scifi/:id", scifiController.fetchScifi);
-// -----------------> Create a Notes - [Create / POST]
-app.post("/scifi", scifiController.createScifi);
-// -----------------> Update a Specific Note - [Update]
-app.put("/scifi/:id", scifiController.updateScifi);
-// -----------------> Delete a Specific Note - [Delete]
-app.delete("/scifi/:id", scifiController.deleteScifi);
-
-
 
 app.listen(PORT, () => console.log(`Express Server Listening on port number: http://localhost:${PORT}`));

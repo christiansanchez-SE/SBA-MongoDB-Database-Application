@@ -69,7 +69,7 @@ const updateFantasy = async (req, res) => {
   const heros = req.body.heros;
   const villains = req.body.villains;
   // --------------------------------(3)
-  const fantasy = await Fantasy.findByIdAndUpdate({
+  const fantasy = await Fantasy.findByIdAndUpdate(fantasyId, {
     book_publisher: book_publisher,
     title: title,
     author: author,

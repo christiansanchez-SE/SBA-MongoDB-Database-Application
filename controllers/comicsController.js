@@ -106,13 +106,3 @@ module.exports = {
     updateComic,
     deleteComic
 };
-
-// {
-//     "book_publisher": "DC Comics",
-//     "title": "SUPERBOY: THE MAN OF TOMORROW",
-//     "author": "Kenny Porter",
-//     "artist": "Jahnoy Lindsay",
-//     "genre": ["Superhero", "Action", "Adventure"],
-//     "heros": ["Superboy", "Supergirl", "Superman", "Batman", "The Flash"],
-//     "villains": ["Chemo", "Lex Luthor", "Gorilla Grodd"]
-// }
